@@ -128,8 +128,10 @@ df_routes, df_timetable = load_data()
 # --- 입력 UI 검색 필드 구성 ---
 st.markdown('<p style="font-weight:bold; font-size:16px; margin-bottom:5px;">🔍 탑승 조건 입력</p>', unsafe_allow_html=True)
 
-# 1) 실시간 현재 시간 및 요일 판별 자동 설정
-now = datetime.now()
+# 1) [서버 배포용 핵심 패치] 해외 서버에서도 무조건 대한민국 표준시(KST)로 연동
+from zoneinfo import ZoneInfo
+now = datetime.now(ZoneInfo("Asia/Seoul"))
+
 current_time_str = now.strftime("%H:%M")
 current_day_of_week = now.weekday()  # 0:월, 1:화, ..., 5:토, 6:일
 
